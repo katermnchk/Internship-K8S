@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      priorityClassName: medium-priority
+      containers:
+        - name: api-gateway
+          image: api-gateway:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8099
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8099
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8099
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          volumeMounts:
+            - mountPath: /app/config/application.yml
+              name: config-volume
+              subPath: application.yml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: api-gateway-config

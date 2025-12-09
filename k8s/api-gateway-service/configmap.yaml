@@ -27,14 +27,17 @@ data:
               predicates:
                 - Path=/api/v1/users
                 - Method=GET
+                
+            - id: user-service-cards-route
+              uri: http://user-service:8081
+              predicates:
+                - Path=/api/v1/cards/**
 
             - id: user-service-specific-routes
               uri: http://user-service:8081
               predicates:
-                - Path=/api/v1/users/{segment}/**
-                - Method=GET
-                - Method=PATCH
-                - Method=DELETE
+                - Path=/api/v1/users/{segment}, /api/v1/users/{segment}/**
+                - Method=GET,PATCH,DELETE
 
             - id: order-service-route
               uri: http://order-service:8082

@@ -15,7 +15,7 @@ spec:
       priorityClassName: medium-priority
       containers:
         - name: payment-service
-          image: payment-service:latest
+          image: payment-service:v1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8083

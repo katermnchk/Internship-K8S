@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+data:
+  DB_HOST: postgres-authservice
+  DB_PORT: "5434"
+  DB_NAME: "innowise_authentification_service"
+  SERVER_PORT: "8080"

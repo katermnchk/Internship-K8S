@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-service-config
+data:
+  MONGO_HOST: "payment-mongo"
+  MONGO_PORT: "27017"
+  MONGO_DB_NAME: "payment_db"
+  SERVER_PORT: "8083"
+  GATEWAY_URL: "http://api-gateway-service:8099"
+  RANDOM_NUMBER_API_PATH: "/api/v1/random/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new"
+
+  KAFKA_BROKER_ID: "1"
+  KAFKA_PORT_INTERNAL: "9092"
+  KAFKA_PORT_EXTERNAL: "29092"
+  ZOOKEEPER_PORT: "2181"
+  KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092"
+  KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+  KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+  KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+  KAFKA_TOPIC_CREATE_ORDER: "order-created-topic"
+  KAFKA_TOPIC_CREATE_PAYMENT: "payment-created-topic"
+
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+  SPRING_KAFKA_CONSUMER_GROUP_ID: "payment-group"
